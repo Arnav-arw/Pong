@@ -35,8 +35,8 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 2
-ball.dy = 2
+ball.dx = 4
+ball.dy = 4
 
 # Pen
 pen = turtle.Turtle()
@@ -51,22 +51,22 @@ pen.write("Player Blue: 0  Player Red: 0", align="center", font=("Courier", 24, 
 # Actions
 def paddle_a_up():
     y=paddle_a.ycor()
-    y+=20
+    y+=40
     paddle_a.sety(y)
 
 def paddle_a_down():
     y=paddle_a.ycor()
-    y-=20
+    y-=40
     paddle_a.sety(y)
 
 def paddle_b_up():
     y=paddle_b.ycor()
-    y+=20
+    y+=40
     paddle_b.sety(y)
 
 def paddle_b_down():
     y=paddle_b.ycor()
-    y-=20
+    y-=40
     paddle_b.sety(y)
 
 # Keyboard bindings
