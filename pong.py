@@ -1,10 +1,15 @@
+from time import sleep
 import turtle
+import os
 
 wn = turtle.Screen()
 wn.title("Pong")
 wn.bgcolor("black")
 wn.setup(width=800, height=600)
 wn.tracer(0)
+
+# AI True or Not
+ai_on = True
 
 # Score
 score_a = 0
@@ -94,6 +99,7 @@ while True:
         ball.dy *= -1
 
     if ball.xcor() > 380:
+        os.system("afplay bounce.wav&")
         ball.goto(0,0)
         ball.dx *= -1
         score_a += 1
@@ -101,6 +107,7 @@ while True:
         pen.write("Player Blue: {}  Player Red: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
     
     elif ball.xcor() < -390:
+        os.system("afplay bounce.wav&")
         ball.goto(0,0)
         ball.dx *= -1
         score_b += 1
@@ -113,6 +120,14 @@ while True:
     
     elif ball.xcor() > 320 and ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50:
         ball.dx *= -1
+        
+    # AI
+    if ai_on == True:
+        if paddle_a.ycor() < ball.ycor() and abs(paddle_a.ycor() - ball.ycor()) > 10:
+            paddle_a_up()
+        elif paddle_a.ycor() < ball.ycor() and abs(paddle_a.ycor() - ball.ycor()) > 10:
+            paddle_a_down()
+        
 
 
 
