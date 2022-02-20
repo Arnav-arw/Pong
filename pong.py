@@ -1,6 +1,6 @@
-from time import sleep
 import turtle
 import os
+import random
 
 wn = turtle.Screen()
 wn.title("Pong")
@@ -20,7 +20,7 @@ paddle_a = turtle.Turtle()
 paddle_a.speed(0)
 paddle_a.shape("square")
 paddle_a.color("blue")
-paddle_a.shapesize(stretch_wid=5,stretch_len=1)
+paddle_a.shapesize(stretch_wid=5, stretch_len=1)
 paddle_a.penup()
 paddle_a.goto(-350, 0)
 
@@ -29,7 +29,7 @@ paddle_b = turtle.Turtle()
 paddle_b.speed(0)
 paddle_b.shape("square")
 paddle_b.color("red")
-paddle_b.shapesize(stretch_wid=5,stretch_len=1)
+paddle_b.shapesize(stretch_wid=5, stretch_len=1)
 paddle_b.penup()
 paddle_b.goto(350, 0)
 
@@ -51,28 +51,35 @@ pen.color("white")
 pen.penup()
 pen.hideturtle()
 pen.goto(0, 260)
-pen.write("Player Blue: 0  Player Red: 0", align="center", font=("Courier", 24, "normal"))
+pen.write("Player Blue: 0  Player Red: 0",
+          align="center", font=("Courier", 24, "normal"))
 
 # Actions
+
+
 def paddle_a_up():
-    y=paddle_a.ycor()
-    y+=40
+    y = paddle_a.ycor()
+    y += 40
     paddle_a.sety(y)
+
 
 def paddle_a_down():
-    y=paddle_a.ycor()
-    y-=40
+    y = paddle_a.ycor()
+    y -= 40
     paddle_a.sety(y)
 
+
 def paddle_b_up():
-    y=paddle_b.ycor()
-    y+=40
+    y = paddle_b.ycor()
+    y += 40
     paddle_b.sety(y)
 
+
 def paddle_b_down():
-    y=paddle_b.ycor()
-    y-=40
+    y = paddle_b.ycor()
+    y -= 40
     paddle_b.sety(y)
+
 
 # Keyboard bindings
 wn.listen()
@@ -100,36 +107,36 @@ while True:
 
     if ball.xcor() > 380:
         os.system("afplay bounce.wav&")
-        ball.goto(0,0)
+        ball.goto(0, 0)
         ball.dx *= -1
         score_a += 1
         pen.clear()
-        pen.write("Player Blue: {}  Player Red: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
-    
+        pen.write("Player Blue: {}  Player Red: {}".format(
+            score_a, score_b), align="center", font=("Courier", 24, "normal"))
+
     elif ball.xcor() < -390:
         os.system("afplay bounce.wav&")
-        ball.goto(0,0)
+        ball.goto(0, 0)
         ball.dx *= -1
         score_b += 1
         pen.clear()
-        pen.write("Player Blue: {}  Player Red: {}".format(score_a, score_b), align="center", font=("Courier", 24, "normal"))
+        pen.write("Player Blue: {}  Player Red: {}".format(
+            score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     # Paddle and ball collisions
     if ball.xcor() < -320 and ball.ycor() < paddle_a.ycor() + 50 and ball.ycor() > paddle_a.ycor() - 50:
-        ball.dx *= -1 
-    
+        ball.dx *= -1
+
     elif ball.xcor() > 320 and ball.ycor() < paddle_b.ycor() + 50 and ball.ycor() > paddle_b.ycor() - 50:
         ball.dx *= -1
-        
+
     # AI
     if ai_on == True:
-        if paddle_a.ycor() < ball.ycor() and abs(paddle_a.ycor() - ball.ycor()) > 10:
-            paddle_a_up()
-        elif paddle_a.ycor() < ball.ycor() and abs(paddle_a.ycor() - ball.ycor()) > 10:
-            paddle_a_down()
-        
-
-
-
-
-
+        if paddle_a.ycor() < ball.ycor() and abs(paddle_a.ycor() - ball.ycor()) > 20:
+            movement = random.randint(0, 25)
+            if movement == 0:
+                paddle_a_up()
+        elif paddle_a.ycor() > ball.ycor() and abs(paddle_a.ycor() - ball.ycor()) > 20:
+            movement = random.randint(0, 25)
+            if movement == 0:
+                paddle_a_down()
