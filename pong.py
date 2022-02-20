@@ -1,3 +1,4 @@
+import platform
 import turtle
 import os
 import random
@@ -103,7 +104,8 @@ while True:
         ball.dy *= -1
 
     if ball.xcor() > 380:
-        os.system("afplay bounce.wav&")
+        if str(platform.system()) == "Darwin":
+            os.system("afplay bounce.wav&")
         ball.goto(0, 0)
         ball.dx *= -1
         score_a += 1
@@ -112,7 +114,8 @@ while True:
             score_a, score_b), align="center", font=("Courier", 24, "normal"))
 
     elif ball.xcor() < -390:
-        os.system("afplay bounce.wav&")
+        if str(platform.system()) == "Darwin":
+            os.system("afplay bounce.wav&")
         ball.goto(0, 0)
         ball.dx *= -1
         score_b += 1
