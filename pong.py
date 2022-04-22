@@ -1,5 +1,5 @@
-import platform
 import turtle
+import platform
 import os
 import random
 
@@ -10,7 +10,10 @@ wn.setup(width=800, height=600)
 wn.tracer(0)
 
 # AI True or Not
-ai_on = True
+ai_on = False
+
+# Ball speed
+ballSpeed = 3
 
 # Score
 score_a = 0
@@ -41,8 +44,8 @@ ball.shape("circle")
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 3
-ball.dy = 3
+ball.dx = ballSpeed
+ball.dy = ballSpeed
 
 # Pen
 pen = turtle.Turtle()
